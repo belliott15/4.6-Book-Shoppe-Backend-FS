@@ -31,6 +31,7 @@ describe('backend-express-template routes', () => {
         }
       ]
     };
+    console.log('res.body', res.body);
     expect(res.body).toEqual(expected);
   });
 
@@ -67,9 +68,9 @@ describe('backend-express-template routes', () => {
 
   it('should add a new book', async () => {
     const book = new Book({
-      title: 'How to become a God', 
-      publisher: 'Penguin Randomhouse', 
-      released: 2022
+      'title': 'How to become a God', 
+      'publisher': 'Penguin Randomhouse', 
+      'released': 2022
     });
     const res = await request(app).post('/books').send(book);
     expect(res.body.title).toEqual(book.title);
@@ -79,9 +80,9 @@ describe('backend-express-template routes', () => {
 
   it('should add a new author', async () => {
     const newAuthor = new Author({
-      name: 'Tyler Bills', 
-      dob: 'December 17, 1989', 
-      pob: 'New Jersey, US'
+      'name': 'Tyler Bills', 
+      'dob': 'December 17, 1989', 
+      'pob': 'New Jersey, US'
     });
     const res = await request(app).post('/books').send(newAuthor);
     expect(res.body.title).toEqual(newAuthor.title);
