@@ -31,7 +31,6 @@ describe('backend-express-template routes', () => {
         }
       ]
     };
-    console.log('res.body', res.body);
     expect(res.body).toEqual(expected);
   });
 
