@@ -2,6 +2,7 @@
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS authors;
+DROP TABLE IF EXISTS books_authors;
 
 CREATE TABLE books (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
@@ -13,39 +14,59 @@ CREATE TABLE books (
 CREATE TABLE authors (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
     name VARCHAR NOT NULL,
-    dob DATE NOT NULL,
-    pob VARCHAR NOT NULL,
+    dob VARCHAR NOT NULL,
+    pob VARCHAR NOT NULL
+);
+
+CREATE TABLE books_authors (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,  
+    author_id INT NOT NULL, 
+    book_id INT NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES authors(id), 
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
 
 INSERT INTO books (
     title, 
     publisher, 
-    released
+    released 
 )
 VALUES
 ('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969),
-('Slaughterhouse Five', 'Delacorte', 1969)
+('American Gods', 'William Morrow', 2001),
+('Good Omens', 'Gollancz', 1990),
+('Fight Club', 'W. W. Norton', 1996),
+('Choke', 'Doubleday', 2001),
+('Survivor', 'W. W. Norton', 1999),
+('The Fifth Season', 'Orbit', 2015),
+('Vicious', 'Tor Books', 2013),
+('A Darker Shade of Magic', 'Tor Books', 2015)
 ;
 
 INSERT INTO authors (
     name, 
     dob, 
-    pob,
+    pob
+)
+VALUES
+('Kurt Vonnegut', 'November 11, 1922', 'Indiana, US'),
+('Neil Gaiman', 'November 10, 1960', 'Porchester, UK'),
+('Chuck Palanuick', 'February 2, 1962', 'Washington, US'),
+('Nora Keita Jemisin', 'September 17, 1972', 'Iowa, US'),
+('Victoria Elizabeth Schwab', 'July 7, 1987', 'California, US')
+;
+
+INSERT INTO books_authors (
+    author_id, 
     book_id
 )
 VALUES
-('Kurt Vonnegut', 1922-11-11, 'Indiana', 1),
-('Kurt Vonnegut', 1922-11-11, 'Indiana', ),
-('Kurt Vonnegut', 1922-11-11, 'Indiana', ),
-('Kurt Vonnegut', 1922-11-11, 'Indiana', ),
-('Kurt Vonnegut', 1922-11-11, 'Indiana', ),
-('Kurt Vonnegut', 1922-11-11, 'Indiana', ),
-('Kurt Vonnegut', 1922-11-11, 'Indiana', ),
+(1, 1),
+(2, 2), 
+(2, 3), 
+(3, 4), 
+(3, 5),
+(3, 6), 
+(4, 7), 
+(5, 8), 
+(5, 9);
