@@ -53,7 +53,8 @@ VALUES
 ('Neil Gaiman', 'November 10, 1960', 'Porchester, UK'),
 ('Chuck Palanuick', 'February 2, 1962', 'Washington, US'),
 ('Nora Keita Jemisin', 'September 17, 1972', 'Iowa, US'),
-('Victoria Elizabeth Schwab', 'July 7, 1987', 'California, US')
+('Victoria Elizabeth Schwab', 'July 7, 1987', 'California, US'),
+('Terry Pratchett', 'April 28, 1948', 'Buckinhamshire, UK')
 ;
 
 INSERT INTO books_authors (
@@ -69,4 +70,5 @@ VALUES
 (3, 6), 
 (4, 7), 
 (5, 8), 
-(5, 9);
+(5, 9),
+(6, 3);
