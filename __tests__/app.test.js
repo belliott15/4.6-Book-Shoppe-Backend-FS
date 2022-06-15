@@ -40,6 +40,20 @@ describe('backend-express-template routes', () => {
     expect(author).toHaveProperty('name', 'Neil Gaiman');
   });
 
+  it('should add a new book and link with authors', async () => {
+    const res = await request(app)
+      .post('/books')
+      .send({ 
+        title: 'How to become a God', 
+        publisher: 'Penguin Randomhouse', 
+        released: 2022, 
+        authorIds: [3, 5] });
+    expect(res.status).toBe(200);
+    expect(res.body.title).toBe('How to become a God');
+    const { body: title } = await request(app).get(`/books/${res.body.id}`);
+    expect(title.authors.length).toBe(2);
+  });
+
   it('GET single author with all the books they authored', async () => {
     const res = await request(app).get('/authors/2');
     const expected = {
@@ -63,18 +77,6 @@ describe('backend-express-template routes', () => {
       ],
     };
     expect(res.body).toEqual(expected);
-  });
-
-  it('should add a new book', async () => {
-    const book = new Book({
-      'title': 'How to become a God', 
-      'publisher': 'Penguin Randomhouse', 
-      'released': 2022
-    });
-    const res = await request(app).post('/books').send(book);
-    expect(res.body.title).toEqual(book.title);
-    expect(res.body.publisher).toEqual(book.publisher);
-    expect(res.body.released).toEqual(book.released);
   });
 
   it('should add a new author', async () => {
