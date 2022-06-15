@@ -47,11 +47,16 @@ describe('backend-express-template routes', () => {
         title: 'How to become a God', 
         publisher: 'Penguin Randomhouse', 
         released: 2022, 
-        authorIds: [3, 5] });
+        authorIds: [3, 5],
+        newAuthor: {
+          name: 'Beau Elliott', 
+          dob: 'July 15, 1989', 
+          pob: 'Colorado, US'
+        } });
     expect(res.status).toBe(200);
     expect(res.body.title).toBe('How to become a God');
     const { body: title } = await request(app).get(`/books/${res.body.id}`);
-    expect(title.authors.length).toBe(2);
+    expect(title.authors.length).toBe(3);
   });
 
   it('GET single author with all the books they authored', async () => {
